@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gamify/models/details.dart';
+import 'package:gamify/models/dev.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //ignore: must_be_immutable
 class GameDetails extends StatefulWidget {
-  GameDetails({super.key, required this.index, required this.postList});
+  GameDetails({super.key, required this.index, required this.postList,required this.devList});
   List<PostModal> postList = [];
+  List<DevDet> devList = [];
   var index;
 
   @override
@@ -42,8 +44,8 @@ class _GameDetailsState extends State<GameDetails> {
           image: DecorationImage(
             image: NetworkImage(
                 widget.postList[widget.index].thumbnail.toString()),
-                fit: BoxFit.cover,
-                opacity: .4,
+            fit: BoxFit.cover,
+            opacity: .4,
           ),
         ),
         child: Column(
@@ -66,7 +68,8 @@ class _GameDetailsState extends State<GameDetails> {
                 style: GoogleFonts.anton(color: Colors.white, fontSize: 20),
               ),
             ]),
-            Row(mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Platform: ',
@@ -78,7 +81,8 @@ class _GameDetailsState extends State<GameDetails> {
                 ),
               ],
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Publisher: ',
@@ -90,7 +94,8 @@ class _GameDetailsState extends State<GameDetails> {
                 ),
               ],
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Developer: ',
@@ -102,7 +107,8 @@ class _GameDetailsState extends State<GameDetails> {
                 ),
               ],
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Release Date: ',
@@ -119,7 +125,11 @@ class _GameDetailsState extends State<GameDetails> {
             ),
             Text(
               'Discription',
-              style: GoogleFonts.anton(color: Colors.red, fontSize: 25,),textAlign: TextAlign.center,
+              style: GoogleFonts.anton(
+                color: Colors.red,
+                fontSize: 25,
+              ),
+              textAlign: TextAlign.center,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
