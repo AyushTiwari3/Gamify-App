@@ -87,73 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       itemExtent: 250.0,
                                       itemCount: postList.length,
                                       itemBuilder: (BuildContext context, int index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                fit: BoxFit.fill,
-                                                image: NetworkImage(postList[index]
-                                                    .thumbnail
-                                                    .toString()),
-                                              ),
-                                            ),
-                                            child: ListTile(
-                                                titleTextStyle: GoogleFonts.anton(
-                                                    color: Colors.white,
-                                                    fontSize: 20),
-                                                title: Padding(
-                                                  padding: const EdgeInsets.fromLTRB(
-                                                      0, 295, 0, 0),
-                                                  child: Text(
-                                                    postList[index].title.toString(),
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                ),
-                                                onTap: () {
-                                                  Navigator.of(context,).push(
-                                                      MaterialPageRoute(
-                                                          builder: (ctx,) =>
-                                                               GameDetails(index: index,postList: postList,),),);
-                                                }),
-                                          ),
-                                        );
-                                      }),
-                                ),
-                                const SizedBox(
-                                  height: 25,
-                                ),
-              ]);
-                          }
-                        })),
-              ],
-            ),
-          ),
-       Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Text(
-                                      'All Time Hits',
-                                      style: GoogleFonts.anton(
-                                        color: Colors.white,
-                                        fontSize: 25,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 500.0,
-                                  height: 350.0,
-                                  child: Expanded(
-                                    child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemExtent: 250.0,
-                                        itemCount: postList.length,
-                                        itemBuilder: (BuildContext context, int index) {
-                                          return Padding(
+                                        return Expanded(
+                                          child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Container(
                                               decoration: BoxDecoration(
@@ -164,37 +99,110 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .toString()),
                                                 ),
                                               ),
-                                              child: ListTile(
-                                                  titleTextStyle: GoogleFonts.anton(
-                                                      color: Colors.white,
-                                                      fontSize: 20),
-                                                  title: Padding(
-                                                    padding: const EdgeInsets.fromLTRB(
-                                                        0, 295, 0, 0),
-                                                    child: Text(
-                                                      postList[index].title.toString(),
-                                                      textAlign: TextAlign.center,
+                                              child: Expanded(
+                                                child: ListTile(
+                                                    titleTextStyle: GoogleFonts.anton(
+                                                        color: Colors.white,
+                                                        fontSize: 20),
+                                                    title: Padding(
+                                                      padding: const EdgeInsets.fromLTRB(
+                                                          0, 295, 0, 0),
+                                                      child: Text(
+                                                        postList[index].title.toString(),
+                                                        textAlign: TextAlign.center,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  onTap: () {
-                                                    Navigator.of(context,).push(
-                                                        MaterialPageRoute(
-                                                            builder: (ctx,) =>
-                                                                 GameDetails(index: index,postList: postList,),),);
-                                                  }),
+                                                    onTap: () {
+                                                      Navigator.of(context,).push(
+                                                          MaterialPageRoute(
+                                                              builder: (ctx,) =>
+                                                                   GameDetails(index: index,postList: postList,),),);
+                                                    }),
+                                              ),
                                             ),
-                                          );
-                                        }),
-                                  ),
+                                          ),
+                                        );
+                                      }),
                                 ),
                                 const SizedBox(
                                   height: 25,
                                 ),
-       
-       
                                 
                                 
-              ]) ],
+                                
+              ]);
+                          }
+                        })),
+              Expanded(
+                child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Text(
+                                        'All Time Hits',
+                                        style: GoogleFonts.anton(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 500.0,
+                                    height: 350.0,
+                                    child: Expanded(
+                                      child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemExtent: 250.0,
+                                          itemCount: postList.length,
+                                          itemBuilder: (BuildContext context, int index) {
+                                            return Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.fill,
+                                                    image: NetworkImage(postList[index]
+                                                        .thumbnail
+                                                        .toString()),
+                                                  ),
+                                                ),
+                                                child: ListTile(
+                                                    titleTextStyle: GoogleFonts.anton(
+                                                        color: Colors.white,
+                                                        fontSize: 20),
+                                                    title: Padding(
+                                                      padding: const EdgeInsets.fromLTRB(
+                                                          0, 295, 0, 0),
+                                                      child: Text(
+                                                        postList[index].title.toString(),
+                                                        textAlign: TextAlign.center,
+                                                      ),
+                                                    ),
+                                                    onTap: () {
+                                                      Navigator.of(context,).push(
+                                                          MaterialPageRoute(
+                                                              builder: (ctx,) =>
+                                                                   GameDetails(index: index,postList: postList,),),);
+                                                    }),
+                                              ),
+                                            );
+                                          }),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  
+                                  
+                                  
+                ]),
+              )],
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.purple[300],
