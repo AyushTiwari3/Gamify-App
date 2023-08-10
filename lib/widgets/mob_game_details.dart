@@ -29,8 +29,8 @@ class _DeveloperMobDetailsState extends State<DeveloperMobDetails> {
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.black,
-      body: SingleChildScrollView(
-        child: Container(
+      body: Container(height: 1000,
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
