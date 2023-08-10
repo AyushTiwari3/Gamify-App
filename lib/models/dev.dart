@@ -4,6 +4,7 @@ class DevDet {
   String? slug;
   int? gamesCount;
   String? imageBackground;
+  String? about;
   List<Games>? games;
 
   DevDet(
@@ -12,7 +13,8 @@ class DevDet {
       this.slug,
       this.gamesCount,
       this.imageBackground,
-      this.games});
+      this.games,
+      this.about});
 
   DevDet.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -20,6 +22,7 @@ class DevDet {
     slug = json['slug'];
     gamesCount = json['games_count'];
     imageBackground = json['image_background'];
+    about = json['about'];
     if (json['games'] != null) {
       games = <Games>[];
       json['games'].forEach((v) {
@@ -35,6 +38,7 @@ class DevDet {
     data['slug'] = this.slug;
     data['games_count'] = this.gamesCount;
     data['image_background'] = this.imageBackground;
+    data['about'] = this.about;
     if (this.games != null) {
       data['games'] = this.games!.map((v) => v.toJson()).toList();
     }

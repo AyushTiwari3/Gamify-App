@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gamify/screens/home_screen.dart';
+import 'package:gamify/screens/nav.dart';
+
 import 'package:transparent_image/transparent_image.dart';
 
 
@@ -19,7 +20,7 @@ class LogInScreen extends StatelessWidget {
                   ElevatedButton(onPressed: (){
                      Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (ctx) => const HomeScreen(),
+        builder: (ctx) => const BottomNav(),
       ),);
                   },style: ElevatedButton.styleFrom(backgroundColor: Colors.purple[900],
                     ),

@@ -34,7 +34,7 @@ class _GameDetailsState extends State<GameDetails> {
         ),
         title: Text(
           widget.postList[widget.index].title.toString(),
-          style: GoogleFonts.anton(color: Colors.white),
+          style: GoogleFonts.anton(color: Colors.white,fontSize: 25),
         ),
         backgroundColor: Colors.black,
       ),
@@ -101,9 +101,11 @@ class _GameDetailsState extends State<GameDetails> {
                   'Developer: ',
                   style: GoogleFonts.anton(color: Colors.green, fontSize: 25),
                 ),
-                Text(
-                  (widget.postList[widget.index].developer.toString()),
-                  style: GoogleFonts.anton(color: Colors.white, fontSize: 20),
+                Flexible(
+                  child: Text(
+                    (widget.postList[widget.index].developer.toString()),
+                    style: GoogleFonts.anton(color: Colors.white, fontSize: 20),
+                  ),
                 ),
               ],
             ),
@@ -141,22 +143,24 @@ class _GameDetailsState extends State<GameDetails> {
             const SizedBox(
               height: 25,
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('Game Url: ',
-                      style:
-                          GoogleFonts.anton(color: Colors.white, fontSize: 20)),
-                ),
-                Expanded(
-                    child: InkWell(
-                  onTap: _launchURL,
-                  child: Text(widget.postList[widget.index].gameUrl.toString(),
-                      style:
-                          GoogleFonts.anton(color: Colors.blue, fontSize: 15)),
-                )),
-              ],
+            Flexible(
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Game Url: ',
+                        style:
+                            GoogleFonts.anton(color: Colors.white, fontSize: 20)),
+                  ),
+                  Expanded(
+                      child: InkWell(
+                    onTap: _launchURL,
+                    child: Text(widget.postList[widget.index].gameUrl.toString(),
+                        style:
+                            GoogleFonts.anton(color: Colors.blue, fontSize: 15)),
+                  )),
+                ],
+              ),
             ),
           ],
         ),

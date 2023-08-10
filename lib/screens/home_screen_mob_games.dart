@@ -2,94 +2,60 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gamify/models/details.dart';
 import 'package:gamify/models/dev.dart';
-import 'package:gamify/widgets/game_details.dart';
+import 'package:gamify/widgets/mob_game_details.dart';
+import 'package:gamify/widgets/pc_game_details.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeMobScreen extends StatefulWidget {
+  const HomeMobScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeMobScreen> createState() => _HomeMobScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  List<PostModal> postList = [];
+class _HomeMobScreenState extends State<HomeMobScreen> {
+  List<PostModal> mobList = [];
 
   Future<List<PostModal>> getPostApi() async {
     final response = await http.get(
-      Uri.parse('https://www.freetogame.com/api/games?'),
+      Uri.parse('https://api.npoint.io/870c662b4bbe98ff3ac4'),
     );
 
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       for (Map<String, dynamic> i in data) {
-        postList.add(PostModal.fromJson(i));
+        mobList.add(PostModal.fromJson(i));
       }
-      return postList;
+      return mobList;
     } else {
-      return postList;
+      return mobList;
     }
   }
 
-  List<PostModal> raceList = [];
-
-  Future<List<PostModal>> getPostApiTwo() async {
-    final response = await http.get(
-      Uri.parse('https://www.freetogame.com/api/games?category=racing'),
-    );
-
-    var data = jsonDecode(response.body.toString());
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      for (Map<String, dynamic> i in data) {
-        raceList.add(PostModal.fromJson(i));
-      }
-      return raceList;
-    } else {
-      return raceList;
-    }
-  }
-   List<DevDet> devList = [];
+  List<DevDet> devMobList = [];
 
   Future<List<DevDet>> getPostApiThree() async {
     final response = await http.get(
-      Uri.parse('https://api.npoint.io/cb587159822c202f4282'),
+      Uri.parse('https://api.npoint.io/b6b49e58b26408314b15'),
     );
 
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       for (Map<String, dynamic> i in data) {
-        devList.add(DevDet.fromJson(i));
+        devMobList.add(DevDet.fromJson(i));
       }
-      return devList;
+      return devMobList;
     } else {
-      return devList;
+      return devMobList;
     }
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
-        actions: [Image.asset("lib/assets/Gamify-1-removebg-preview.png")],
-        centerTitle: true,
-        title: Text(
-          'GAMIFY',
-          style: GoogleFonts.lilitaOne(
-            color: Colors.purple[900],
-          ),
-        ),
-        backgroundColor: Colors.black,
-      ),
+      
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -127,12 +93,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                             SizedBox(
                                               width: 500.0,
-                                              height: 350.0,
+                                              height: 370.0,
                                               child: ListView.builder(
                                                   scrollDirection:
                                                       Axis.horizontal,
                                                   itemExtent: 290.0,
-                                                  itemCount: postList.length,
+                                                  itemCount: mobList.length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {
@@ -147,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               DecorationImage(
                                                             fit: BoxFit.fill,
                                                             image: NetworkImage(
-                                                                postList[index]
+                                                                mobList[index]
                                                                     .thumbnail
                                                                     .toString()),
                                                           ),
@@ -168,10 +134,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       0,
                                                                       0),
                                                               child: Expanded(
-                                                                child: SizedBox(height: 100,
+                                                                child: SizedBox(
+                                                                  height: 100,
                                                                   child: Text(
-                                                                    postList[
-                                                                            index]
+                                                                    mobList[index]
                                                                         .title
                                                                         .toString(),
                                                                     textAlign:
@@ -179,8 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                             .center,
                                                                   ),
                                                                 ),
-                                                              
-
                                                               ),
                                                             ),
                                                             onTap: () {
@@ -195,11 +159,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     index:
                                                                         index,
                                                                     postList:
-                                                                        postList,
-                                                                        devList: devList,
+                                                                        mobList,
+                                                                    devList:
+                                                                        devMobList,
                                                                   ),
                                                                 ),
-                                                            );
+                                                              );
                                                             }),
                                                       ),
                                                     );
@@ -214,85 +179,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-            ),
-            
-            FutureBuilder(
-              future: getPostApiTwo(),
-              builder: (context_1, snapshot_1) {
-                if (!snapshot_1.hasData) {
-                  return const Text('Loading');
-                } else {
-                  return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              'All Time Racing Hits',
-                              style: GoogleFonts.anton(
-                                color: Colors.white,
-                                fontSize: 25,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 500.0,
-                          height: 350.0,
-                          child: Expanded(
-                            child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemExtent: 250.0,
-                                itemCount: raceList.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          fit: BoxFit.fill,
-                                          image: NetworkImage(raceList[index]
-                                              .thumbnail
-                                              .toString()),
-                                        ),
-                                      ),
-                                      child: ListTile(
-                                          titleTextStyle: GoogleFonts.anton(
-                                              color: Colors.white,
-                                              fontSize: 20),
-                                          title: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                0, 295, 0, 0),
-                                            child: Text(
-                                              raceList[index].title.toString(),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            Navigator.of(
-                                              context,
-                                            ).push(
-                                              MaterialPageRoute(
-                                                builder: (
-                                                  ctx,
-                                                ) =>
-                                                    GameDetails(
-                                                  index: index,
-                                                  postList: raceList,
-                                                  devList: devList,
-                                                ),
-                                              ),
-                                            );
-                                          }),
-                                    ),
-                                  );
-                                }),
-                          ),
-                        ),
-                      ]);
-                }
-              },
             ),
             FutureBuilder(
               future: getPostApiThree(),
@@ -317,27 +203,26 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(
                           width: 500.0,
-                          height: 350.0,
+                          height: 370.0,
                           child: Expanded(
                             child: ListView.builder(
-                              
-
                                 scrollDirection: Axis.horizontal,
                                 itemExtent: 250.0,
-                                itemCount: devList.length,
+                                itemCount: devMobList.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
-                                      decoration: BoxDecoration(shape: BoxShape.circle,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.contain,
-                                          image: NetworkImage(devList[index].imageBackground
+                                          image: NetworkImage(devMobList[index]
+                                              .imageBackground
                                               .toString()),
                                         ),
                                       ),
                                       child: ListTile(
-                                        
                                           titleTextStyle: GoogleFonts.anton(
                                               color: Colors.white,
                                               fontSize: 20),
@@ -345,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             padding: const EdgeInsets.fromLTRB(
                                                 0, 295, 0, 0),
                                             child: Text(
-                                              devList[index].name.toString(),
+                                              devMobList[index].name.toString(),
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
@@ -354,16 +239,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               context,
                                             ).push(
                                               MaterialPageRoute(
-                                                builder: (
-                                                  ctx,
-                                                ) =>
-                                                    GameDetails(
-                                                  index: index,
-                                                  postList: postList,
-                                                  devList: devList,
-
-                                                ),
-                                              ),
+                                                  builder: (
+                                                ctx,
+                                              ) =>
+                                                      DeveloperMobDetails(
+                                                        index: index,
+                                                        devMobList: devMobList,
+                                                      )),
                                             );
                                           }),
                                     ),
@@ -378,19 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.purple[300],
-        items: [
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.gamepad_outlined),
-            label: 'Pc/Console Games',
-          ),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.mobile_screen_share_rounded),
-              label: 'Mobile Games',
-              backgroundColor: Colors.purple[900])
-        ],
-      ),
+      
     );
   }
 }
